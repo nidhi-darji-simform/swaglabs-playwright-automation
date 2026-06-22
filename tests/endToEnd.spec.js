@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { loginPage } = require('../pageObjects/loginPage');
 const { productPage } = require('../pageObjects/productPage');
 
-test.only('E2E - Complete Purchase Flow', async ({ page }) => {
+test('E2E - Complete Purchase Flow', async ({ page }) => {
 
     const LoginPage = new loginPage(page);
     const ProductPage = new productPage(page);
