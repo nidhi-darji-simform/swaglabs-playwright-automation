@@ -8,14 +8,14 @@ export class productPage extends basePage{
       this.addToCartButton = (itemName) => page.locator(`//div[text()='${itemName}']//..//parent::div[@class='inventory_item_label']//following-sibling::div[@class='pricebar']//button`);
       this.cartIcon = page.locator('//a[@class="shopping_cart_link"]');    
       this.removeButton = (itemName) => page.locator(`//div[text()='${itemName}']/../../div/button`);  
-      this.checkoutButton = page.locator("// button [@id = 'checkout']");
+      this.checkoutButton = page.locator("//button[@id='checkout']");
       this.firstName = page.locator("//input [@id='first-name']");
       this.lastName = page.locator("//input [@id='last-name']");
       this.postalCode = page.locator("//input [@id='postal-code']");
       this.continueButton = page.locator("//input [@id='continue']");
       this.cartbadge = page.locator ("//span[@class = 'shopping_cart_badge']");
       this.removeButton = (itemName) => page.locator("//button [@id='remove-sauce-labs-backpack']");
-      this.isItemVisibleInCart = (itemName) => page.locator("//div[text()='${itemName}']");
+      this.isItemVisibleInCart = (itemName) => page.locator(`//div[@class='inventory_item_name'][text()='${itemName}']`);
       this.ischeckoutInfoPageHeader = page.locator("//span [text()='Checkout: Your Information']");
       this.ischeckoutOverviewPageHeader = page.locator("//span [text()='Checkout: Overview']");
       this.menuButton = page.locator("//button [@id='react-burger-menu-btn']");
@@ -24,7 +24,10 @@ export class productPage extends basePage{
       this.aboutLink = page.locator ("//a [text() = 'About']");
       this.logout = page.locator("//a[text()='Logout']");
       this.filterDropdown = page.locator('[data-test="product-sort-container"]');
-      this.filteroptions = page.locator("(//div[@class='inventory_item_price'])"); 
+      this.filteroptions = page.locator("(//div[@class='inventory_item_price'])");
+      this.finishButton = page.locator("//button[@id='finish']");
+      this.orderConfirmationContainer = page.locator("//div[@class='checkout_complete_container']");
+      this.orderConfirmationHeader = page.locator("//h2[@class='complete-header']");
 
     }
 
@@ -107,5 +110,17 @@ export class productPage extends basePage{
       
       async getFirstProductPrice() {
       return await this.filteroptions.allInnerTexts();
+      }
+
+      async clickOnFinishButton() {
+        await this.finishButton.click();
+      }
+
+      async isOrderConfirmationVisible() {
+        return await this.orderConfirmationContainer.isVisible();
+      }
+
+      async getOrderConfirmationText() {
+        return await this.orderConfirmationHeader.innerText();
       }
   };
